@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import FieldMixin from './mixins/FieldMixin'
+  import FieldMixin from '../mixins/FieldMixin'
 
   export default {
     mixins: [FieldMixin]

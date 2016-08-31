@@ -1,11 +1,12 @@
-import Vue from 'vue'
 import store from '../vuex/store'
-import Actions from '../vuex/actions'
+import VuexActions from '../vuex/actions'
 import {getModel, getModelConfig, getCommonConfig, getTable, configLoaded} from '../vuex/getters'
 import swal from 'sweetalert2'
 
 export default {
   store,
+  components: {
+  },
   vuex: {
     getters: {
       model: getModel,
@@ -15,7 +16,7 @@ export default {
       configLoaded: configLoaded
     },
     actions: {
-      fetchConfig: Actions.fetchConfig
+      fetchConfig: VuexActions.fetchConfig
     }
   },
 
@@ -53,7 +54,7 @@ export default {
 
         })
         .then(() => {
-          var pageUrl = Actions.apiUrl + 'saveModel'
+          var pageUrl = VuexActions.apiUrl + 'saveModel'
           this.$http.post(pageUrl, {args: [this.table, JSON.stringify(this.model)]}).then ((resp) => {
             var res = resp.json()
             if (res && typeof res.success !== 'undefined' && res.success) {
@@ -69,7 +70,7 @@ export default {
                     cancelButtonText: "Forget it"
                   })
                   .then(() => {
-                    var pageUrl = Actions.apiUrl + 'runMigrations'
+                    var pageUrl = VuexActions.apiUrl + 'runMigrations'
                     this.$http.post(pageUrl, {}).then((resp) => {
                       var res = resp.json()
                       if (res && typeof res.success !== 'undefined' && res.success) {

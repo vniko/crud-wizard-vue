@@ -3,8 +3,6 @@ import Resource from 'vue-resource'
 import Router from 'vue-router'
 import Vuex from 'vuex'
 import Sortable from 'vue-sortable'
-import VueMdl from 'vue-mdl'
-import FormControls from './components/ui/form/FormControls'
 import './helpers'
 
 import App from './components/App.vue'
@@ -21,14 +19,13 @@ Vue.use(Resource)
 Vue.use(Router)
 Vue.use(Vuex)
 Vue.use(Sortable)
-Vue.use(VueMdl)
-Vue.use(FormControls)
 
 export var router = new Router()
 
 router.map({
 
   '/index': {
+    name: 'model_index',
     component: Index
 
   },

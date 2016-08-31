@@ -118,7 +118,6 @@
 <script>
 
     import Vue from 'vue';
-    import Modal from './ui/Modal.vue'
     import { getConfig, getModel } from '../vuex/getters'
     import Actions from '../vuex/actions'
 
@@ -127,7 +126,6 @@
       name: 'FormEdit',
 
       components: {
-          Modal
         },
 
         vuex: {

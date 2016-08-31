@@ -30,7 +30,7 @@
   </table>
 </template>
 <script>
-  import PropFill from '../../utils/PropFill'
+  import PropFill from '../../../utils/PropFill'
 
   export default {
     props: {

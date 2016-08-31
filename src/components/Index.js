@@ -1,6 +1,6 @@
 import template from './html/index.html'
 import store from '../vuex/store'
-import Actions from '../vuex/actions'
+import VuexActions from '../vuex/actions'
 
 import { getModels, modelsLoaded } from '../vuex/getters'
 
@@ -19,7 +19,8 @@ export default{
       modelsLoaded: modelsLoaded
     },
     actions: {
-      fetchModels: Actions.fetchModels
+      fetchModels: VuexActions.fetchModels,
+      resetModel: VuexActions.resetModel
     }
 
   },
@@ -29,6 +30,7 @@ export default{
       if (!this.modelsLoaded) {
         this.fetchModels()
       }
+      this.resetModel()
     }
   }
 }

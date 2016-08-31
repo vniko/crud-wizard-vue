@@ -8,6 +8,16 @@
 //   return text
 // }
 
+export function makeid() {
+  let text = ''
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (let i = 0; i < 5; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return text
+}
+
 Array.prototype.move = function (from, to) {
   this.splice(to, 0, this.splice(from, 1)[0])
 }

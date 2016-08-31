@@ -1,29 +1,47 @@
     <model-edit>
+        <div class="row margin-top-20">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="acl" class="col-md-2 control-label">Acl</label>
+                <div class="col-md-4">
+                    <select class="form-control default_select" id="acl" name="acl"
+                            v-model="model.acl" style="width:250px;">
+                        <option value="">Choose acl</option>
+                        <option v-for="(acl, acl_title) in commonConfig.acls" v-bind:value="acl" :value="acl">
+                            {{ acl_title }}
+                        </option>
 
-        <dform  :model.sync="model" :structure="structure" v-if="configLoaded"></dform>
-
-
-
-        <!--</select>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-        <!--<label for="ent_name_r">(Russian only) Model entity name (Родительный-->
-        <!--падеж)</label>-->
-        <!--<input type="text" class="form-control" id="ent_name_r" name="ent_name_r"-->
-        <!--v-model="model.ent_name_r"/>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-        <!--<label for="ent_name_v">(Russian only) Model entity name (Винительный-->
-        <!--падеж)</label>-->
-        <!--<input type="text" class="form-control" id="ent_name_v" name="ent_name_v"-->
-        <!--v-model="model.ent_name_v"/>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-        <!--<label for="dialog_width">Modal dialog width (optional)</label>-->
-        <!--<input type="text" class="form-control" id="dialog_width"-->
-        <!--name="dialog_width" v-model="model.dialog_width"/>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tf" class="col-md-2 control-label">Title field</label>
+                <div class="col-md-4">
+                    <select id="tf" class="form-control default_select"   v-model="model.title_field" style="width:250px;">
+                        <option value="">Choose database table field</option>
+                        <option v-for="(key, col) in modelConfig.table_columns" v-bind:value="col">
+                            {{ col }}
+                        </option>
+                    </select>
+                    <div class="help-block">DB table field that serves as title or name of the
+                        entity
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="track_history" class="col-md-2 control-label">Audit trail</label>
+                <div class="col-md-4">
+                    <select name="track_history" id="track_history"
+                            class="form-control default_select" style="width:250px;"
+                            v-model="model.track_history">
+                        <option v-for="(value, text) in commonConfig.track_history_options" v-bind:value="value">
+                            {{ text }}
+                        </option>
+                    </select>
+                    <div class="help-block">How to track model changes. Database history
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
     </model-edit>

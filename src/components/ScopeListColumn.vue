@@ -104,7 +104,7 @@
 
     import Vue from 'vue';
     import { getConfig, getModel, getRelations } from '../vuex/getters'
-    import Actions from '../vuex/actions'
+    import VuexActions from '../vuex/actions'
 
     export default{
 
@@ -155,7 +155,7 @@
                 if (val) {
                     var model = this.model.fields[val].model;
                     if (typeof model != 'undefined') {
-                        var page_url = Actions.apiUrl + 'getModelAttributes'
+                        var page_url = VuexActions.apiUrl + 'getModelAttributes'
                         this.$http.get(page_url, {params: {args: [model]}}).then((resp)=> {
                             this.$set('relation_attrs', resp.json())
                         });

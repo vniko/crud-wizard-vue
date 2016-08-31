@@ -1,11 +1,15 @@
 import TextField from './Text.vue'
 import SelectField from './Select.vue'
 import SwitchField from './Switch.vue'
+import CheckboxField from './Checkbox.vue'
+import VButton from './Button.vue'
 
 export const components = {
   TextField,
   SelectField,
-  SwitchField
+  SwitchField,
+  CheckboxField,
+  VButton
 }
 
 export default {
@@ -18,6 +22,7 @@ export default {
 
 export {
   TextField,
-  SelectField,
-  SwitchField
+  SwitchField,
+  CheckboxField,
+  VButton
 }

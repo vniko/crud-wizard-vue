@@ -1,30 +1,39 @@
 <template>
-  <div class="mdl-grid mdl-grid--no-spacing">
-    <div class="mdl-cell mdl-cell--4-col" v-show="chooseType">
-      <mdl-select @change="addNew()" label="Choose relation type" :options="$parent.commonConfig.relation_options" :value.sync="type"></mdl-select>
-    </div>
-    <div class="mdl-cell mdl-cell--2-col" style="padding-top:15px;">
-      <mdl-button v-mdl-ripple-effect icon  colored  @click="chooseType=true" v-if="!chooseType">
-        <i class="material-icons">add</i> Add relation
-      </mdl-button>
-      <mdl-button v-mdl-ripple-effect icon colored accent   @click="cancel()" v-if="chooseType">
-        <i class="material-icons">cancel</i>
-      </mdl-button>
+  <div class="row pull-right" style="width:50%">
 
+    <div class="col-lg-1 pull-right" v-if="chooseType" style="padding-top:10px;">
+      <a class="text-danger" @click="cancel()" title="Cancel">
+        <i class="fa fa-times"></i>
+      </a>
     </div>
-  </div>
+
+    <div class="col-lg-6 pull-right"  v-if="chooseType">
+      <select class="form-control" v-model="type" >
+        <option value="">-- Choose relation type</option>
+        <option value="k" v-for="(k,v) in $parent.commonConfig.relation_options" v-bind:value="k" >{{ v }}</option>
+      </select>
+    </div>
+
+    <div class="col-lg-3 pull-right"  v-if="!chooseType">
+      <button class="btn btn-danger"   @click="chooseType=true">
+        <i class="fa fa-plus"></i> Add relation
+      </button>
+    </div>
+   </div>
 </template>
-<style>
-  .mdl-textfield__label {
-    color: #0d47a1;
-  }
-</style>
 <script>
   export default {
     data () {
       return {
         type: '',
         chooseType: false,
+      }
+    },
+    watch: {
+      'type': function (val) {
+        if (val) {
+          this.addNew()
+        }
       }
     },
     methods: {

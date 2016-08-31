@@ -172,16 +172,14 @@
 <script>
 
   import Vue from 'vue';
-  import Modal from './ui/Modal.vue'
   import {getConfig, getModel} from '../vuex/getters'
-  import Actions from '../vuex/actions'
+  import VuexActions from '../vuex/actions'
 
   export default {
 
     name: 'FieldEdit',
 
     components: {
-      Modal
     },
 
     vuex: {
@@ -265,7 +263,7 @@
 
         }
 
-        Actions.validateForm($('form#field_form'), () => {
+        VuexActions.validateForm($('form#field_form'), () => {
           delete this.field.is_for_virtual;
           var key = this.field.key;
           delete this.field.key;

@@ -25,12 +25,6 @@ export default{
     }
   },
   methods: {
-
-    editRelation (key) {
-      this.$broadcast('relation::edit', key)
-      this.$broadcast('show::modal', 'relation_modal')
-    },
-
     isRelation (row) {
       if (row.$value.relation) {
         return row

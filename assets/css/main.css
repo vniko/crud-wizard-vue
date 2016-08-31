@@ -9420,13 +9420,10 @@ input.mdl-button[type=submit] {
     margin: 0;
     padding: 4px 0;
     background: 0 0;
-    color: inherit;
+    color: black;
     outline: 0
 }
 
-.mdl-textfield.is-disabled.is-disabled .mdl-textfield__label, .mdl-textfield__label, fieldset[disabled] .mdl-textfield .mdl-textfield__label {
-    color: rgba(0, 0, 0, .26)
-}
 
 .mdl-textfield__input[type=number] {
     -moz-appearance: textfield

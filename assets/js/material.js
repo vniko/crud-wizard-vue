@@ -1303,6 +1303,11 @@ MaterialMenu.prototype.handleForKeyboardEvent_ = function (evt) {
                 evt.preventDefault();
                 items[0].focus();
             }
+        } else if (items && items.length > 0 && !this.container_.classList.contains(this.CssClasses_.IS_VISIBLE)) {
+          if (evt.keyCode === this.Keycodes_.DOWN_ARROW) {
+            evt.preventDefault();
+            this.toggle(evt);
+          }
         }
     }
 };

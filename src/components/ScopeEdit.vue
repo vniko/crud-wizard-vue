@@ -200,9 +200,8 @@
 <script>
 
   import Vue from 'vue';
-  import Modal from './ui/Modal.vue'
   import {getConfig, getModel} from '../vuex/getters'
-  import Actions from '../vuex/actions'
+  import VuexActions from '../vuex/actions'
   import ListColumn from './ScopeListColumn.vue'
   import ListAction from './ScopeListAction.vue'
 
@@ -211,7 +210,6 @@
     name: 'ScopeEdit',
 
     components: {
-      Modal,
       ListColumn,
       ListAction
     },
@@ -409,7 +407,7 @@
       },
       save() {
 
-        Actions.validateForm($('form#scope_form'), () => {
+        VuexActions.validateForm($('form#scope_form'), () => {
 
           if (!Object.keys(this.model.scopes).length) {
             let scopes = {};

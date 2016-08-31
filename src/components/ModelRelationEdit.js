@@ -1,6 +1,6 @@
 import ModelMixin from '../mixins/ModelMixin'
 import template from './html/model_relation_edit.html'
-import Actions from '../vuex/Actions'
+import VuexActions from '../vuex/Actions'
 
 export default {
   template,
@@ -9,22 +9,26 @@ export default {
   data () {
     return {
       empty_relation: {
-        'title': '',
-        'relation': '',
-        'model': '',
-        'on_delete': '',
-        'field': '',
-        'editable': false,
-        'type': '',
-        'find': '',
-        'pivot': 0,
-        'pivot_table': '',
-        'pivot_self_key': '',
-        'pivot_foreign_key': ''
+        title: '',
+        relation: '',
+        model: '',
+        on_delete: '',
+        field: '',
+        editable: false,
+        type: '',
+        find: '',
+        pivot: 0,
+        pivot_table: '',
+        pivot_self_key: '',
+        pivot_foreign_key: '',
+        required: false
       },
-      model_obj: {'columns': [], 'find_methods': []},
+      relationModel: {
+        columns: [],
+        find_methods: []
+      },
       relation: {},
-      edit_types: {},
+      editTypes: {},
       pivot_columns: [],
       edit: false
     }
@@ -40,9 +44,14 @@ export default {
 
     'relation::edit' (key) {
       this.edit = true
-      this.relation = this.model.fields[key]
+      this.relation = Object.assign({}, this.empty_relation, JSON.parse(JSON.stringify(this.model.fields[key])))
       this.relation.key = key
+      this.$refs.popup.open()
     }
+  },
+
+  beforeCompile () {
+    this.initEmptyRelation()
   },
 
   methods: {
@@ -57,8 +66,11 @@ export default {
     },
 
     save () {
+      if (this.$refs.form.validate()) {
 
-    //   Actions.validateForm($('form#relation_form'), () => {
+      }
+
+    //   VuexActions.validateForm($('form#relation_form'), () => {
     //
     //     let relation = Object.assign({}, this.relation);
     //
@@ -98,23 +110,23 @@ export default {
   watch: {
     'relation.relation': function (value) {
       if (value) {
-        var pageUrl = Actions.apiUrl + 'getAvailableRelationFieldTypes'
+        var pageUrl = VuexActions.apiUrl + 'getAvailableRelationFieldTypes'
         this.$http.get(pageUrl, {params: {args: [value]}}).then((resp)=> {
-          this.$set('edit_types', resp.json())
+          this.$set('editTypes', resp.json())
         })
       }
     },
     'relation.model': function (value) {
       if (value) {
-        var pageUrl = Actions.apiUrl + 'getRelationModelData'
+        var pageUrl = VuexActions.apiUrl + 'getRelationModelData'
         this.$http.get(pageUrl, {params: {args: [value]}}).then((resp)=> {
-          this.$set('model_obj', resp.json())
+          this.$set('relationModel', resp.json())
         })
       }
     },
     'relation.pivot_table': function (value) {
       if (value) {
-        var pageUrl = Actions.apiUrl + 'getTableColumns'
+        var pageUrl = VuexActions.apiUrl + 'getWizardTableColumns'
         this.$http.get(pageUrl, {params: {args: [value]}}).then((resp)=> {
           this.$set('pivot_columns', resp.json())
         })

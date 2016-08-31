@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-  import FormLayoutMixin from './mixins/FormLayoutMixin'
+  import FormLayoutMixin from '../mixins/FormLayoutMixin'
 
   export default {
     mixins: [FormLayoutMixin]

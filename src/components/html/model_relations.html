@@ -1,29 +1,32 @@
 <model-edit>
-    <add-relation-btn></add-relation-btn>
+    <div class="col-lg-9 col-lg-offset-1">
 
-        <table class="mdl-data-table mdl-js-data-table	" style="width:100%">
+        <add-relation-btn></add-relation-btn>
+
+
+        <table class="table table-striped">
         <thead>
         <tr>
 
-            <th class="mdl-data-table__cell--non-numeric" width="50px">Type</th>
-            <th class="mdl-data-table__cell--non-numeric" width="150px">Attribute name</th>
-            <th class="mdl-data-table__cell--non-numeric" width="150px">Edit Type</th>
-            <th  class="mdl-data-table__cell--non-numeric">Title</th>
-            <th class="mdl-data-table__cell--non-numeric" width="150px;">Relation model</th>
+            <th class="" width="50px">Type</th>
+            <th class="" width="150px">Attribute name</th>
+            <th class="" width="150px">Edit Type</th>
+            <th  class="">Title</th>
+            <th class="" width="150px;">Relation model</th>
             <th width="100px"></th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="(key, rel) in model.fields | filterBy isRelation">
-            <td  class="mdl-data-table__cell--non-numeric"><span class="text-success">
+            <td  class=""><span class="text-success">
                                             <img :title="rel.relation"
                                                  :src="'/assets/images/icons/'+ rel.relation+ '.png'"/></span>
             </td>
-            <td  class="mdl-data-table__cell--non-numeric">{{ key }}</td>
-            <td  class="mdl-data-table__cell--non-numeric">{{ rel.type }}</td>
-            <td  class="mdl-data-table__cell--non-numeric">{{ rel.title }}</td>
-            <td  class="mdl-data-table__cell--non-numeric">{{ rel.model }}</td>
-            <td><a  @click.prevent="editRelation(key)" >
+            <td  class="">{{ key }}</td>
+            <td  class="">{{ rel.type }}</td>
+            <td  class="">{{ rel.title }}</td>
+            <td  class="">{{ rel.model }}</td>
+            <td><a  @click.prevent="this.$broadcast('relation::edit', key)" >
                 <mdl-button v-mdl-ripple-effect icon primary colored mini-fab>
                     <i class="material-icons">edit</i>
                 </mdl-button>
@@ -45,5 +48,6 @@
         </tbody>
     </table>
     <add-relation-btn></add-relation-btn>
-    <relation-edit></relation-edit>
+    <!--<relation-edit></relation-edit>-->
+    </div>
 </model-edit>
