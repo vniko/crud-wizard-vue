@@ -1,11 +1,15 @@
 import ModelMixin from '../mixins/ModelMixin'
 import template from './html/model_relation_edit.html'
 import VuexActions from '../vuex/Actions'
+import Modal from './ui/Modal.vue'
 
 export default {
   template,
   name: 'ModelRelationEdit',
   mixins: [ModelMixin],
+  components: {
+    Modal
+  },
   data () {
     return {
       empty_relation: {
@@ -39,7 +43,7 @@ export default {
     'relation::new' (type) {
       this.initEmptyRelation()
       this.relation.relation = type
-      this.$refs.popup.open()
+      this.$refs.popup.show()
     },
 
     'relation::edit' (key) {
@@ -61,7 +65,7 @@ export default {
     },
 
     close () {
-      this.$refs.popup.close()
+      this.$refs.popup.hide()
       this.initEmptyRelation()
     },
 
@@ -103,11 +107,18 @@ export default {
     //     }
     //   });
     //
-     }
+    }
 
   },
 
   watch: {
+
+    'addRelation': function (value) {
+
+      alert('1111');
+      alert(value);
+    },
+
     'relation.relation': function (value) {
       if (value) {
         var pageUrl = VuexActions.apiUrl + 'getAvailableRelationFieldTypes'

@@ -15,14 +15,17 @@
     </div>
 
     <div class="col-lg-3 pull-right"  v-if="!chooseType">
-      <button class="btn btn-danger"   @click="chooseType=true">
+      <button class="btn btn-primary"   @click="chooseType=true">
         <i class="fa fa-plus"></i> Add relation
       </button>
     </div>
    </div>
 </template>
 <script>
+  import store from '../vuex/store'
+
   export default {
+    store,
     data () {
       return {
         type: '',

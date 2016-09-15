@@ -26,21 +26,15 @@
             <td  class="">{{ rel.type }}</td>
             <td  class="">{{ rel.title }}</td>
             <td  class="">{{ rel.model }}</td>
-            <td><a  @click.prevent="this.$broadcast('relation::edit', key)" >
-                <mdl-button v-mdl-ripple-effect icon primary colored mini-fab>
-                    <i class="material-icons">edit</i>
-                </mdl-button>
-                </a>
-                <a  @click.prevent="this.$store.dispatch('DELETE_FIELD',key)" >
-                    <mdl-button v-mdl-ripple-effect accent icon primary colored mini-fab>
-                        <i class="material-icons">delete</i>
-                    </mdl-button>
-                </a>
+            <td nowrap="nowrap">
+                <button   class="btn btn-success" @click.prevent="this.$broadcast('relation::edit', key)">
+                    <i class="fa fa-edit"></i>
+                </button>
 
 
-                <a class="text-danger" href="#" @click.prevent=""
-                   style="font-size: 20px;"><i class="fa fa-trash-o"> </i></a>
-
+                <button   class="btn btn-danger" @click.prevent="this.$store.dispatch('DELETE_FIELD',key)">
+                    <i class="fa fa-trash-o"></i>
+                </button>
 
 
             </td>
@@ -48,6 +42,6 @@
         </tbody>
     </table>
     <add-relation-btn></add-relation-btn>
-    <!--<relation-edit></relation-edit>-->
+    <relation-edit></relation-edit>
     </div>
 </model-edit>

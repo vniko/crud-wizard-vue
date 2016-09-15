@@ -24,7 +24,8 @@ const state = {
   },
   modelConfig: {},
   configLoaded: false,
-  modelsLoaded: false
+  modelsLoaded: false,
+  addRelation: ''
 
 }
 
@@ -69,7 +70,12 @@ const mutations = {
           'success'
         )
       }, () => {})
+  },
+
+  RELATION_ADD (state, type) {
+    state.addRelation = type;
   }
+
 }
 
 export default new Vuex.Store({
