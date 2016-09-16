@@ -1,6 +1,6 @@
 import ModelMixin from '../mixins/ModelMixin'
 import template from './html/model_relation_edit.html'
-import VuexActions from '../vuex/Actions'
+import VuexActions from '../vuex/actions'
 import Modal from './ui/Modal.vue'
 
 export default {
@@ -50,7 +50,7 @@ export default {
       this.edit = true
       this.relation = Object.assign({}, this.empty_relation, JSON.parse(JSON.stringify(this.model.fields[key])))
       this.relation.key = key
-      this.$refs.popup.open()
+      this.$refs.popup.show()
     }
   },
 
@@ -70,43 +70,39 @@ export default {
     },
 
     save () {
-      if (this.$refs.form.validate()) {
 
-      }
 
-    //   VuexActions.validateForm($('form#relation_form'), () => {
-    //
-    //     let relation = Object.assign({}, this.relation);
-    //
-    //     if (relation.find == "") {
-    //       delete relation.find;
-    //     }
-    //
-    //     if (relation.on_delete == "") {
-    //       delete relation.on_delete;
-    //     }
-    //     if (relation.required === false) {
-    //       delete relation.required;
-    //     }
-    //     if (relation.relation != 'belongsToMany') {
-    //       delete relation.pivot;
-    //       delete relation.pivot_foreign_key;
-    //       delete relation.pivot_self_key;
-    //       delete relation.pivot_table;
-    //
-    //     }
-    //
-    //     Vue.set(this.model.fields, relation.key, relation);
-    //     this.$broadcast('hide::modal', 'relation_modal');
-    //     if (!this.edit) {
-    //       swal(
-    //         'Well done!',
-    //         'You\'ve just added a new relation',
-    //         'success'
-    //       );
-    //     }
-    //   });
-    //
+      // if (this.$refs.form.validate()) {
+      //
+      // }
+
+      VuexActions.validateForm($('form#relation_form'), () => {
+        let relation = Object.assign({}, this.relation)
+        if (relation.find === '') {
+          delete relation.find
+        }
+        if (relation.on_delete === '') {
+          delete relation.on_delete
+        }
+        if (relation.relation !== 'belongsToMany') {
+          delete relation.pivot
+          delete relation.pivot_foreign_key
+          delete relation.pivot_self_key
+          delete relation.pivot_table
+        }
+
+        this.$store.dispatch('SET_FIELD',relation.key, relation)
+
+        this.$refs.popup.hide()
+
+        if (!this.edit) {
+          swal(
+            'Well done!',
+            'You\'ve just added a new relation',
+            'success'
+          )
+        }
+      })
     }
 
   },

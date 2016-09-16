@@ -19,29 +19,23 @@ export default {
   },
   resetModel ({dispatch}) {
     dispatch('RESET_TABLE')
+  },
+
+  validateForm ($form, callback) {
+    var wasError = false
+    $form.find('input[required], select[required]').each(function () {
+      if (!$(this).val()) {
+        wasError = true
+        return false
+      }
+    })
+    if (wasError) {
+      swal('Please, fill all the required fields', '', 'warning')
+      return false
+    }
+
+    return callback()
   }
-
-// VuexActions.fetchModel = function ({dispatch}, table) {
-//   var pageUrl = apiUrl + 'getModelConfig'
-//   return Vue.http.get(pageUrl, {params: {args: [table]}})
-//     .then((response) => dispatch('SET_MODEL', response.json()))
-//     .catch((error) => Promise.reject(error))
-// }
-
-// VuexActions.validateForm = function ($form, callback) {
-//   let bootstrapValidator = $form.data('bootstrapValidator')
-//   if (bootstrapValidator) {
-//     bootstrapValidator.validate()
-//     console.log(bootstrapValidator)
-//     console.log(bootstrapValidator.isValid())
-//     if (!bootstrapValidator.isValid()) {
-//       swal('Please, fill all the required fields', '', 'warning')
-//       return false
-//     }
-//   }
-//
-//   return callback()
-// }
 }
 
 

@@ -72,8 +72,8 @@ const mutations = {
       }, () => {})
   },
 
-  RELATION_ADD (state, type) {
-    state.addRelation = type;
+  SET_FIELD (state, key, field) {
+    Vue.set(state.model.fields, key, field)
   }
 
 }
