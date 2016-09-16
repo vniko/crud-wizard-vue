@@ -1,0 +1,35 @@
+<model-edit>
+<div class="col-lg-9 col-lg-offset-1">
+<add-field-btn></add-field-btn>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="200px">Attribute name</th>
+        <th width="100px">Type</th>
+        <th>Title</th>
+        <th width="100px"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(key, f) in model.fields | filterBy isField">
+        <td>{{ key }}</td>
+        <td>{{ f.type }}</td>
+        <td>{{ f.title }}</td>
+        <td nowrap="nowrap">
+            <button   class="btn btn-default" @click.prevent="cloneField(key)">
+                <i class="fa fa-clone"> </i>
+            </button>
+            <button   class="btn btn-success" @click.prevent="editField(key)">
+                <i class="fa fa-edit"></i>
+            </button>
+            <button   class="btn btn-danger" @click.prevent="this.$store.dispatch('DELETE_FIELD',key)">
+                <i class="fa fa-trash-o"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<add-field-btn></add-field-btn>
+<field-edit></field-edit>
+</div>
+</model-edit>
