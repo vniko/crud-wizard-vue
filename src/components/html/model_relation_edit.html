@@ -114,8 +114,8 @@
 
                             <select v-model="relation.find"  class="form-control default_select">
                                 <option value="">No method</option>
-                                <option v-for="row in relationModel.find_methods" v-bind:value="row.name">
-                                    {{ row.name }} ({{ row.description }})
+                                <option v-for="(name, desc)  in relationModel.find_methods" v-bind:value="name">
+                                    {{ desc }}
                                 </option>
                             </select>
                         </div>

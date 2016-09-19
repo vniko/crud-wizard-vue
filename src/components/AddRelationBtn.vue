@@ -1,5 +1,5 @@
 <template>
-  <div class="row pull-right" style="width:50%">
+  <div class="row pull-right" style="width:50%;margin-bottom:15px;">
 
     <div class="col-lg-1 pull-right" v-if="chooseType" style="padding-top:10px;">
       <a class="text-danger" @click="cancel()" title="Cancel">

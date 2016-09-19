@@ -1,6 +1,6 @@
 <template>
 
-  <div class="row pull-right" style="width:100%">
+  <div class="row pull-right" style="width:100%; margin-bottom:15px;">
 
     <div class="col-lg-3 pull-right text-right" v-if="!show_block">
       <a href="#" class="btn btn-primary" @click.prevent="show_block = true"><i class="fa fa-plus"></i>
@@ -22,16 +22,10 @@
         <select class="form-control default_select" id="rtype" v-model.sync="$parent.$parent.new_field_type"
                 style="display:inline; width:250px;">
           <option value="">Choose field type</option>
-
           <option v-for="(val, text) in $parent.$parent.commonConfig.field_options" v-bind:value="val">
             {{ text }}
           </option>
-
         </select>
-
-
-
-
       <button class="btn btn-primary" @click.prevent="add()" style="margin-top:-3px;">Add</button>
         <a class="text-danger" @click="cancel()" title="Cancel" style="margin-left:20px;">
           <i class="fa fa-times"></i>
@@ -51,12 +45,13 @@
 
     methods: {
       add () {
-        this.$parent.$parent.addField()
-        this.cancel()
+        if (this.$parent.$parent.addField()) {
+          this.cancel();
+        }
+
       },
       notUsedField (row) {
-
-        if (typeof this.$parent.model.fields[row] == 'undefined') {
+        if (typeof this.$parent.$parent.model.fields[row.$key] == 'undefined') {
           return true;
         }
 

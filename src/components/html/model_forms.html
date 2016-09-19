@@ -1,0 +1,32 @@
+<model-edit>
+    <div class="col-lg-9 col-lg-offset-1">
+        <add-form-btn></add-form-btn>
+        <table class="table table-striped">
+            <tr>
+                <th width="200px">Form alias</th>
+                <th width="100px">Type</th>
+                <th>Fields</th>
+                <th></th>
+            </tr>
+            <tr v-for="(key, f) in $parent.model.forms">
+                <td>{{ key }}</td>
+                <td>{{ getFormType(f) }}</td>
+                <td>{{ getFormFields(f).join(', ') }}</td>
+                <td nowrap="nowrap">
+                    <button   class="btn btn-default" @click.prevent="cloneForm(key)">
+                        <i class="fa fa-clone"> </i>
+                    </button>
+                    <button   class="btn btn-success" @click.prevent="editForm(key)">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button   class="btn btn-danger" @click.prevent="deleteForm(key)">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+
+                </td>
+            </tr>
+        </table>
+        <add-form-btn></add-form-btn>
+        <form-edit v-ref:form></form-edit>
+    </div>
+</model-edit>

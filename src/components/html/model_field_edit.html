@@ -21,7 +21,7 @@
                                 <select class="form-control default_select" id="clone_key" style="display:inline; width:250px;"
                                         v-model="field.key">
                                     <option value="">Choose existing database table field</option>
-                                    <option v-for="f in config.table_columns | filterBy notUsedField" v-bind:value="f">
+                                    <option v-for="f in modelConfig.table_columns | filterBy notUsedField" v-bind:value="f">
                                         {{ f }}
                                     </option>
                                 </select>
@@ -43,7 +43,7 @@
                                 <label>Format</label>
                                 <select class="form-control default_select" name="format" required v-model="field.format">
                                     <option value="">Choose format</option>
-                                    <option v-for="(key,v) in config.date_formats" v-bind:value="v.php">
+                                    <option v-for="(key,v) in commonConfig.date_formats" v-bind:value="v.php">
                                         {{ v.php }}
                                     </option>
                                 </select>
@@ -53,7 +53,7 @@
                                 <label>Format</label>
                                 <select class="form-control default_select" name="format" required v-model="field.format">
                                     <option value="">Choose format</option>
-                                    <option v-for="(key,v) in config.date_time_formats" v-bind:value="v.php">
+                                    <option v-for="(key,v) in commonConfig.date_time_formats" v-bind:value="v.php">
                                         {{ v.php }}
                                     </option>
                                 </select>
@@ -68,7 +68,7 @@
                             <div class="form-group" v-if="showField('editor_type')">
                                 <label> Editor type</label>
                                 <select class="form-control  default_select" name="editor_type" v-model="field.editor_type">
-                                    <option v-for="(value, text) in config.editor_types" v-bind:value="value">
+                                    <option v-for="(value, text) in commonConfig.editor_types" v-bind:value="value">
                                         {{ text }}
                                     </option>
                                 </select>
@@ -79,7 +79,7 @@
                                 <select class="form-control default_select" :value="field.fields[0]" v-model="field.fields[0]"
                                         name="start_field" required>
                                     <option value="">Choose field</option>
-                                    <option v-for="f in config.table_columns | filterBy notUsedField" v-bind:value="f">
+                                    <option v-for="f in modelConfig.table_columns | filterBy notUsedField" v-bind:value="f">
                                         {{ f }}
                                     </option>
                                 </select>
@@ -87,7 +87,7 @@
                                 <select class="form-control default_select" :value="field.fields[1]" v-model="field.fields[1]"
                                         name="end_field" required>
                                     <option value="">Choose field</option>
-                                    <option v-for="f in config.table_columns | filterBy notUsedField" v-bind:value="f">
+                                    <option v-for="f in modelConfig.table_columns | filterBy notUsedField" v-bind:value="f">
                                         {{ f }}
                                     </option>
                                 </select>
@@ -97,15 +97,15 @@
                                 <div class="row">
                                     <div class="col col-xs-4">
                                         <label>Min</label>
-                                        <input type="text" class="form-control" name="min" v-model="field.min">
+                                        <input type="number" class="form-control" name="min" v-model="field.min">
                                     </div>
                                     <div class="col col-xs-4">
                                         <label>Max</label>
-                                        <input type="text" class="form-control" name="max" v-model="field.max">
+                                        <input type="number" class="form-control" name="max" v-model="field.max">
                                     </div>
                                     <div class="col col-xs-4">
                                         <label>Step</label>
-                                        <input type="text" class="form-control" name="step" v-model="field.step">
+                                        <input type="number" class="form-control" name="step" v-model="field.step">
                                     </div>
                                 </div>
                             </div>
@@ -115,8 +115,8 @@
                                 <select class="form-control default_select" name="find" :value="field.find" required
                                         v-model="field.find">
                                     <option value="">Choose method</option>
-                                    <option v-for=" f in config.find_methods" v-bind:value="f.name">
-                                        {{ f.name }} ({{ f.description }})
+                                    <option v-for="(name, desc) in modelConfig.find_methods" v-bind:value="name">
+                                        {{ desc }}
                                     </option>
                                 </select>
 
@@ -139,13 +139,13 @@
                                        v-model="field.extra"
                                 >
                             </div>
-                            <div class="form-group">
-                                <div class="checkbox" v-if="showField('required')">
-                                    <label>
-                                        <input type="checkbox" name="required" v-model="field.required"/> Required
-                                    </label>
-                                </div>
-                            </div>
+                            <!--<div class="form-group">-->
+                                <!--<div class="checkbox" v-if="showField('required')">-->
+                                    <!--<label>-->
+                                        <!--<input type="checkbox" name="required" v-model="field.required"/> Required-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
 
 
                         </div>

@@ -37,13 +37,15 @@ export default{
 
       if (this.new_field_key_new === '' && this.commonConfig.fields_config[this.new_field_type]['is_for_virtual']) {
         swal('Oh no : (', 'This field type can be used only with a virtual property. Please enter a new property.', 'warning')
-        return false;
+        return false
       }
 
       this.$broadcast('field::new', {type: this.new_field_type, key: (this.new_field_key || this.new_field_key_new)})
       this.new_field_type = ''
       this.new_field_key = ''
       this.new_field_key_new = ''
+
+      return true
     },
 
     cloneField (key) {

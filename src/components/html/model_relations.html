@@ -5,7 +5,6 @@
 
 
         <table class="table table-striped">
-        <thead>
         <tr>
 
             <th class="" width="50px">Type</th>
@@ -15,8 +14,6 @@
             <th class="" width="150px;">Relation model</th>
             <th width="100px"></th>
         </tr>
-        </thead>
-        <tbody>
         <tr v-for="(key, rel) in model.fields | filterBy isRelation">
             <td  class=""><span class="text-success">
                                             <img :title="rel.relation"
@@ -39,7 +36,6 @@
 
             </td>
         </tr>
-        </tbody>
     </table>
     <add-relation-btn></add-relation-btn>
     <relation-edit></relation-edit>

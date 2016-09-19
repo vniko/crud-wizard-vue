@@ -1,14 +1,11 @@
-import template from './html/index.html'
-import store from '../vuex/store'
-import VuexActions from '../vuex/actions'
-
-import { getModels, modelsLoaded } from '../vuex/getters'
+import template from "./html/index.html";
+import store from "../vuex/store";
+import VuexActions from "../vuex/actions";
+import {getModels, modelsLoaded} from "../vuex/getters";
 
 export default{
   data () {
-    return {
-
-    }
+    return {}
   },
 
   template: template,

@@ -12,7 +12,6 @@ export default {
   },
   data () {
     return {
-      empty_field: {},
       field: {
         type: '',
         key: ''
@@ -27,9 +26,7 @@ export default {
 
   events: {
     'field::new' ({type, key}) {
-      this.initEmptyField()
-      this.field.key = key
-      this.field.type = type
+      this.initEmptyField(type, key)
       this.initFieldConfig(true)
       this.$refs.popup.show()
     },
@@ -49,22 +46,17 @@ export default {
       this.field.key = ''
       this.initFieldConfig()
       this.$refs.popup.show()
-    },
-
-    'hide::modal' (id) {
-      if (id === 'field_modal') {
-        this.initEmptyField()
-      }
     }
   },
 
   methods: {
-    initEmptyField () {
-      this.field = Object.assign({}, this.empty_field)
+    initEmptyField (type, key) {
+      this.field = {key: key, type: type}
       this.edit = false
     },
 
     close () {
+      this.field.type = '';
       this.$refs.popup.hide()
     },
 
@@ -87,13 +79,20 @@ export default {
         delete this.field.is_for_virtual
         var key = this.field.key
         delete this.field.key
-        Vue.set(this.model.fields, key, Object.assign({}, this.field))
-        this.initEmptyField()
-        this.$broadcast('hide::modal', 'field_modal')
+        if (this.field.find === '') {
+          delete this.field.find
+        }
+        if (this.field.extra === '') {
+          delete this.field.extra
+        }
+        this.$store.dispatch('SET_FIELD', key, Object.assign({}, this.field))
+        this.field.type = '';
+        this.$refs.popup.hide()
       })
     },
 
     initFieldConfig (assignDefaults) {
+      console.log(this.field);
       this.$set('fieldConfig', this.commonConfig.fields_config[this.field.type])
       if (assignDefaults) {
         Object.assign(this.field, this.fieldConfig.defaults)
@@ -105,12 +104,12 @@ export default {
     },
 
     showField (fieldName) {
-      if (typeof this.fieldConfig['sections'] === 'object'
-        &&
-        this.fieldConfig['sections'].indexOf(fieldName) >= 0) {
+      if (this.field.type == '') {
+        return false;
+      }
+      if (typeof this.fieldConfig['sections'] === 'object' && this.fieldConfig['sections'].indexOf(fieldName) >= 0) {
         return true
       }
-
       return false
     },
 
@@ -118,7 +117,6 @@ export default {
       if (typeof this.model.fields[row] === 'undefined') {
         return true
       }
-
       return false
     }
   },
