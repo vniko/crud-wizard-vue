@@ -24,11 +24,11 @@ export default {
     },
 
     editForm (key) {
-      this.$refs.form.editForm()
+      this.$refs.form.editForm(key)
     },
 
     cloneForm (key) {
-      this.$refs.form.cloneForm()
+      this.$refs.form.cloneForm(key)
     },
 
     deleteForm (key) {
@@ -53,7 +53,7 @@ export default {
     },
     getFormType (form) {
       if (Array.isArray(form)) {
-        return 'simple';
+        return 'simple'
       } else if (Object.keys(form).length) {
         return 'tabbed'
       }

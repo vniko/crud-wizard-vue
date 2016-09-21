@@ -56,10 +56,10 @@ export default {
 
     cloneForm (key) {
       this.edit = true
-      this.formKey = key
       this.$refs.popup.show()
-      this.$store.dispatch('SET_FORM', key + '_clone', this.model.forms[key])
-      this.initFields(this.model.forms[key + '_clone'])
+      this.formKey = key + '_clone'
+      this.$store.dispatch('SET_FORM', this.formKey, this.model.forms[key])
+      this.initFields(this.model.forms[key])
     },
 
     editForm (key) {
@@ -84,8 +84,8 @@ export default {
 
       this.tabs.push(tab)
       this.newTabTitle = ''
-
     },
+
     deleteField (key, rel) {
       this.fields.splice(key, 1)
       if (rel) {
@@ -104,14 +104,12 @@ export default {
         var availFields = Object.keys(this.model.fields)
         availFields.sort()
 
-        if (this.$parent.getFormType(form) === 'simple') {
+        if (this.$parent.$parent.getFormType(form) === 'simple') {
           form.forEach(function (f) {
             fields.push({key: f})
           })
-        } else if (this.$parent.getFormType(form) === 'tabbed') {
-
+        } else if (this.$parent.$parent.getFormType(form) === 'tabbed') {
           for (var tabid in form) {
-
             let tab = JSON.parse(JSON.stringify(form[tabid]))
             tab.alias = tabid
             tab.tab = true
@@ -126,7 +124,6 @@ export default {
             }
           }
         }
-
         this.$set('fields', fields)
         this.$set('availableFields', availFields)
       }
