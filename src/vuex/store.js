@@ -74,6 +74,10 @@ const mutations = {
 
   SET_FIELD (state, key, field) {
     Vue.set(state.model.fields, key, field)
+  },
+
+  SET_FORM (state, key, form) {
+    Vue.set(state.model.forms, key, form)
   }
 
 }

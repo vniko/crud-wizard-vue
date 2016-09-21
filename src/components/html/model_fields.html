@@ -13,13 +13,13 @@
         <td>{{ f.type }}</td>
         <td>{{ f.title }}</td>
         <td nowrap="nowrap">
-            <button   class="btn btn-default" @click.prevent="cloneField(key)">
+            <button title="Clone"   class="btn btn-default" @click.prevent="cloneField(key)">
                 <i class="fa fa-clone"> </i>
             </button>
-            <button   class="btn btn-success" @click.prevent="editField(key)">
+            <button title="Edit"  class="btn btn-success" @click.prevent="editField(key)">
                 <i class="fa fa-edit"></i>
             </button>
-            <button   class="btn btn-danger" @click.prevent="this.$store.dispatch('DELETE_FIELD',key)">
+            <button title="Delete"  class="btn btn-danger" @click.prevent="this.$store.dispatch('DELETE_FIELD',key)">
                 <i class="fa fa-trash-o"></i>
             </button>
         </td>

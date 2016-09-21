@@ -13,13 +13,13 @@
                 <td>{{ getFormType(f) }}</td>
                 <td>{{ getFormFields(f).join(', ') }}</td>
                 <td nowrap="nowrap">
-                    <button   class="btn btn-default" @click.prevent="cloneForm(key)">
+                    <button  title="Clone" class="btn btn-default" @click.prevent="cloneForm(key)">
                         <i class="fa fa-clone"> </i>
                     </button>
-                    <button   class="btn btn-success" @click.prevent="editForm(key)">
+                    <button title="Edit"  class="btn btn-success" @click.prevent="editForm(key)">
                         <i class="fa fa-edit"></i>
                     </button>
-                    <button   class="btn btn-danger" @click.prevent="deleteForm(key)">
+                    <button  title="Delete" class="btn btn-danger" @click.prevent="deleteForm(key)">
                         <i class="fa fa-trash-o"></i>
                     </button>
 

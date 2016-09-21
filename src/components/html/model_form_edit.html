@@ -38,8 +38,8 @@
                                     <template v-for="(key, f) in fields">
 
                                         <template v-if="f.tab">
-                                        <span class="list-group-item  list-group-item-danger" style="cursor: move">
-                                            <button class="btn btn-danger pull-right" @click.prevent="deleteField(key)"><i
+                                        <span class="list-group-item  list-group-item-warning" style="height:48px;cursor: move">
+                                            <button class="btn btn-danger pull-right" style="margin-top: -6px;" @click.prevent="deleteField(key)"><i
                                                     class="fa fa-trash-o"></i></button>
                                             <span>
                                             <span class="fa fa-folder-o"></span> {{ f.title }}
@@ -48,8 +48,8 @@
                                         </span>
                                         </template>
                                         <template v-else>
-                                        <span class="list-group-item" style="cursor: move">
-                                            <button class="btn btn-danger pull-right"
+                                        <span class="list-group-item" style="min-height:48px;cursor: move">
+                                            <button class="btn btn-danger pull-right" style="margin-top: -6px;"
                                                     @click.prevent="deleteField(key, f.key)"><i
                                                     class="fa fa-trash-o"></i></button>
                                             <b>{{ f.key }}</b> {{ model.fields[f.key].title }} ({{ model.fields[f.key].type }})
@@ -57,35 +57,6 @@
                                         </span>
                                         </template>
                                     </template>
-
-
-                                    <!--<template v-if="form.fields.length">-->
-                                    <!--<span  v-for="f  in  form.fields" style="cursor: move"-->
-                                    <!--data-rel="{{ f }}" class="list-group-item list-group-item-info">-->
-                                    <!--<b>{{ f }}</b> {{ model.fields[f].title }} ({{ model.fields[f].type }})-->
-                                    <!--</span>-->
-                                    <!--</template>-->
-                                    <!--<template v-else >-->
-                                    <!--<template v-for="(key, tab) in form.tabs">-->
-                                    <!--<span  class="list-group-item list-group-item-danger"-->
-                                    <!--data-view="{{ tab.view }}"-->
-                                    <!--data-key="{{ key }}"-->
-                                    <!--data-form_tab="1" style="cursor: move">-->
-                                    <!--<span>-->
-                                    <!--<span class="fa fa-folder-o"></span> {{ tab.title }}-->
-                                    <!--</span>-->
-                                    <!--<small v-if="tab.view">({{ tab.view }})</small>-->
-                                    <!--<div class="pull-right"><a href="#" @click.prevent="$dispatch('dom::remove_parent', $event)"  data-parent="span.list-group-item-danger" data-confirm="Really delete this tab?" class="label label-danger"><i class="fa fa-trash-o"></i> Remove</a>-->
-                                    <!--</div>-->
-                                    <!--</span>-->
-                                    <!--<template v-if="tab.fields.length">-->
-                                    <!--<span  v-for="f  in  tab.fields" style="cursor: move"-->
-                                    <!--data-rel="{{ f }}" class="list-group-item list-group-item-info">-->
-                                    <!--<b>{{ f }}</b> {{ model.fields[f].title }} ({{ model.fields[f].type }})-->
-                                    <!--</span>-->
-                                    <!--</template>-->
-                                    <!--</template>-->
-                                    <!--</template>-->
                                 </div>
                             </div>
                         </div>
@@ -95,7 +66,7 @@
                                 <div style="min-height:30px;" data-rel="fields_stack" class="list-group"
                                      v-sortable="sortableStackOptions">
                                  <span v-for="f  in  availableFields" style="cursor: move"
-                                       data-rel="{{ f }}" class="list-group-item list-group-item-info">
+                                       data-rel="{{ f }}" class="list-group-item  active">
                                         <b>{{ f }}</b> {{ model.fields[f].title }} ({{ model.fields[f].type }})
                                     </span>
                                 </div>
