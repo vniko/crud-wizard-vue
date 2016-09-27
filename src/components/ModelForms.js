@@ -3,6 +3,7 @@ import template from './html/model_forms.html'
 import ModelMixin from '../mixins/ModelMixin'
 import ModelEdit from './ModelEdit'
 import AddFormBtn from './AddFormBtn.vue'
+import swal from 'sweetalert2'
 
 export default {
   name: 'ModelForms',
@@ -42,7 +43,7 @@ export default {
           confirmButtonText: 'Yes, delete it!'
         })
         .then(() => {
-          Vue.delete(this.model.forms, key)
+          this.$store.dispatch('DELETE_FORM', key)
           swal(
             'Deleted!',
             'The form has been deleted.',

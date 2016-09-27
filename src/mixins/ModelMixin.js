@@ -1,6 +1,6 @@
 import store from '../vuex/store'
 import VuexActions from '../vuex/actions'
-import {getModel, getModelConfig, getCommonConfig, getTable, configLoaded} from '../vuex/getters'
+import {getModel, getModelConfig, getCommonConfig, getTable, configLoaded, getEventHub, getRelations} from '../vuex/getters'
 import swal from 'sweetalert2'
 
 export default {
@@ -13,7 +13,9 @@ export default {
       table: getTable,
       modelConfig: getModelConfig,
       commonConfig: getCommonConfig,
-      configLoaded: configLoaded
+      configLoaded: configLoaded,
+      eventHub: getEventHub,
+      relations: getRelations
     },
     actions: {
       fetchConfig: VuexActions.fetchConfig

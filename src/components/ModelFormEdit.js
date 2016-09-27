@@ -20,6 +20,7 @@ export default {
       usedFields: [],
       form: {fields: [], tabs: {}},
       formKey: '',
+      editableFormKey: '',
       edit: false,
       newTabTitle: '',
       fieldsContainer: null,
@@ -57,7 +58,12 @@ export default {
     cloneForm (key) {
       this.edit = true
       this.$refs.popup.show()
-      this.formKey = key + '_clone'
+
+      if (typeof this.model.forms[key + '_clone'] !== 'undefined') {
+        this.formKey = key + '_' + (Object.keys(this.model.forms).length + 1)
+      } else {
+        this.formKey = key + '_clone'
+      }
       this.$store.dispatch('SET_FORM', this.formKey, this.model.forms[key])
       this.initFields(this.model.forms[key])
     },
@@ -106,6 +112,7 @@ export default {
 
         if (this.$parent.$parent.getFormType(form) === 'simple') {
           form.forEach(function (f) {
+            availFields.$remove(f)
             fields.push({key: f})
           })
         } else if (this.$parent.$parent.getFormType(form) === 'tabbed') {
@@ -126,12 +133,13 @@ export default {
         }
         this.$set('fields', fields)
         this.$set('availableFields', availFields)
+        this.editableFormKey = this.formKey
       }
     },
 
     initEmptyForm () {
       this.form = {fields: [], tabs: {}}
-      if (typeof  this.model.forms == 'undefined' || !Object.keys(this.model.forms).length) {
+      if (typeof this.model.forms === 'undefined' || !Object.keys(this.model.forms).length) {
         this.formKey = 'default'
       } else {
         this.formKey = 'form_' + (Object.keys(this.model.forms).length + 1)
@@ -144,24 +152,17 @@ export default {
     },
 
     save () {
+      if (this.formKey !== this.editableFormKey && typeof this.model.forms[this.editableFormKey] !== 'undefined') {
+        swal('Oh no : (', 'Form alias "' + this.editableFormKey + '" is already in use. Please, choose another one', 'warning')
+        return
+      }
       VuexActions.validateForm($('form#form_form'), () => {
         if (this.tabs.length <= 0) {
           var formArr = []
           this.fields.forEach(function (f, i) {
             formArr.push(f.key)
           })
-
           this.$store.dispatch('SET_FORM', this.formKey, formArr)
-
-          // if (!Object.keys(this.model.forms).length) {
-          //   let forms = {}
-          //   forms[this.formKey] = formArr
-          //   this.$set('model.forms', forms)
-          //   this.$store.dispatch('SET_FORM', this.formKey, formArr)
-          // } else {
-          //
-          // }
-          // Vue.set(this.model.forms,this.formKey,formArr)
         } else {
           var firstTabInd = 0
           this.fields.every((f, i) => {

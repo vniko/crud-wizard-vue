@@ -1,3 +1,4 @@
+export const getEventHub = state => state.eventHub
 export const getModel = state => state.model
 export const getTable = state => state.table
 export const getModels = state => state.models

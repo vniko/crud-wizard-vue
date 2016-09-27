@@ -1,0 +1,32 @@
+<model-edit>
+  <div class="col-lg-9 col-lg-offset-1">
+<add-scope-btn></add-scope-btn><br/><br/>
+<table class="table table-striped">
+  <tr>
+    <th width="100px">Alias</th>
+    <th width="200px">Title</th>
+    <th>Columns</th>
+    <th width="150px"></th>
+  </tr>
+  <tr v-for="(key, s) in $parent.model.scopes">
+    <td>{{ key }}</td>
+    <td>{{ s.title }}</td>
+    <td>{{ getListCols(s.list).join(', ') }}</td>
+    <td  nowrap="nowrap">
+      <button  title="Clone" class="btn btn-default" @click.prevent="cloneScope(key)">
+        <i class="fa fa-clone"> </i>
+      </button>
+      <button title="Edit"  class="btn btn-success" @click.prevent="editScope(key)">
+        <i class="fa fa-edit"></i>
+      </button>
+      <button  title="Delete" class="btn btn-danger" @click.prevent="deleteScope(key)">
+        <i class="fa fa-trash-o"></i>
+      </button>
+    </td>
+  </tr>
+</table>
+
+<add-scope-btn></add-scope-btn>
+<scope-edit v-ref:form></scope-edit>
+</div>
+</model-edit>

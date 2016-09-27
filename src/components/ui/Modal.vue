@@ -51,6 +51,9 @@
       }
     },
     methods: {
+      open () {
+        this.show()
+      },
       show() {
         this.$el.style.display = 'block'
         this._body = document.querySelector('body')
@@ -64,6 +67,9 @@
             _this.$dispatch('shown::modal')
           }, (_this.fade) ? TRANSITION_DURATION : 0)
         }, 0)
+      },
+      close () {
+        this.hide()
       },
       hide() {
         const _this = this

@@ -10,7 +10,7 @@ import General from './components/ModelGeneral'
 import Relations from './components/ModelRelations'
 import Fields from './components/ModelFields'
 import Forms from './components/ModelForms'
-import Scopes from './components/Scopes.vue'
+import Scopes from './components/ModelScopes'
 import Index from './components/Index'
 import store from './vuex/store'
 

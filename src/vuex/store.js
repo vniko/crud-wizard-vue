@@ -4,6 +4,7 @@ import swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
+
 const defaultModel = {
   acl: '',
   tree: false,
@@ -13,6 +14,8 @@ const defaultModel = {
   fields: {},
   scopes: {}
 }
+
+const eventHub = new Vue()
 
 const state = {
   table: '',
@@ -25,7 +28,8 @@ const state = {
   modelConfig: {},
   configLoaded: false,
   modelsLoaded: false,
-  addRelation: ''
+  addRelation: '',
+  eventHub: eventHub
 
 }
 
@@ -54,12 +58,12 @@ const mutations = {
   DELETE_FIELD (state, key) {
     swal(
       {
-        title: "Are you sure?",
-        text: "You will not be able to recover this field!",
-        type: "warning",
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this field!',
+        type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Yes, delete it!'
 
       })
       .then(() => {
@@ -78,8 +82,10 @@ const mutations = {
 
   SET_FORM (state, key, form) {
     Vue.set(state.model.forms, key, form)
+  },
+  DELETE_FORM (state, key) {
+    Vue.delete(state.model.forms, key)
   }
-
 }
 
 export default new Vuex.Store({
